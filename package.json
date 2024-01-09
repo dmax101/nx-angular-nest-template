@@ -2,7 +2,12 @@
   "name": "@nx-angular-nest-template/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "seed": "npx prisma db seed"
+  },
+  "prisma": {
+    "seed": "ts-node prisma\\seed.ts"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~17.0.0",
