@@ -11,11 +11,13 @@ import {
 import { AuthService } from './auth.service';
 import { AuthCredentialsDto } from './auth-credentials.dto';
 import { AuthGuard } from './auth.guard';
+import { Public } from './public.decorator';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @Public()
   @HttpCode(HttpStatus.OK)
   @Post('login')
   signIn(@Body() signInDto: AuthCredentialsDto) {

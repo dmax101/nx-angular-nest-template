@@ -24,10 +24,10 @@ import { AuthGuard } from './auth.guard';
     UsersService,
     PrismaService,
     JwtService,
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: AuthGuard,
-    // },
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
   ],
 })
 export class AuthModule {}
