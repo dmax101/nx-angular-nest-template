@@ -6,6 +6,7 @@
     "seed": "npx prisma db seed"
   },
   "prisma": {
+    "serve:api": "npx nx run api:serve",
     "seed": "ts-node prisma\\seed.ts"
   },
   "private": true,
