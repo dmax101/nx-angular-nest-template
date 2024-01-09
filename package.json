@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "serve:api": "npx nx run api:serve",
     "seed": "npx prisma db seed"
   },
   "prisma": {
-    "serve:api": "npx nx run api:serve",
     "seed": "ts-node prisma\\seed.ts"
   },
   "private": true,
