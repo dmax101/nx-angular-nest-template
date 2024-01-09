@@ -21,7 +21,6 @@ async function bootstrap() {
     .setDescription('Template for fast development!')
     .setVersion('1.0')
     .addTag('template')
-    .setBasePath('api')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
