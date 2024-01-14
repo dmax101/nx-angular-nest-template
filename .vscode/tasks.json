@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "serve:ui",
+      "isBackground": true,
+      "problemMatcher": [
+        {
+          "owner": "typescript",
+          "pattern": "$tsc",
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": {
+              "regexp": "(.*?)"
+            },
+            "endsPattern": {
+              "regexp": "bundle generation complete"
+            }
+          }
+        }
+      ],
+      "label": "npm: serve:ui",
+      "detail": "nx serve nx-angular-nest-template"
+    }
+  ]
+}
