@@ -1,0 +1,25 @@
+<label class="flex flex-row justify-center items-center gap-2" for="theme" (click)="toggleDarkMode()">
+  <small
+    [class]="
+      (isDarkMode$ | async) ? 'bg-yellow-200 p-1 rounded-full text-black' : ''
+    "
+  >
+    dark theme
+  </small>
+
+  <input
+    id="theme"
+    type="checkbox"
+    class="toggle toggle-sm"
+    
+    [checked]="(isDarkMode$ | async) === false"
+  />
+
+  <small
+    [class]="
+      (isDarkMode$ | async) ? '' : 'bg-yellow-200 p-1 rounded-full text-black'
+    "
+  >
+    light theme
+  </small>
+</label>

@@ -1,0 +1,68 @@
+<div
+  class="w-screen h-screen bg-[url(https://picsum.photos/1200/1200)] bg-cover bg-no-repeat flex justify-center items-center"
+>
+  <div
+    class="glass bg-transparent dark:bg-slate-900 dark:bg-opacity-80 w-96 bg-slate-100 rounded-lg p-8"
+  >
+    <div class="w-full text-center mb-4">
+      <img
+        class="hover:animate-pulse"
+        [src]="
+          (isDarkMode$ | async)
+            ? 'assets/images/logo_h_ngtv.svg'
+            : 'assets/images/logo_h_pb.svg'
+        "
+        alt=""
+      />
+    </div>
+    <form class="w-full flex flex-col gap-4">
+      <div class="w-full flex gap-2">
+        <label class="form-control w-full max-w-xs">
+          <div class="label">
+            <span class="label-text">E-mail</span>
+            <!-- <span class="label-text-alt">Top Right label</span> -->
+          </div>
+          <input
+            type="email"
+            placeholder="E-mail"
+            class="input input-bordered w-full max-w-xs"
+          />
+          <div class="label">
+            <!-- <span class="label-text-alt">Bottom Left label</span>
+    <span class="label-text-alt">Bottom Right label</span> -->
+          </div>
+        </label>
+      </div>
+      <div class="w-full flex gap-2">
+        <label class="form-control w-full max-w-xs">
+          <div class="label">
+            <span class="label-text">Password</span>
+            <!-- <span class="label-text-alt">Top Right label</span> -->
+          </div>
+          <input
+            type="password"
+            placeholder="Password"
+            class="input input-bordered w-full max-w-xs"
+          />
+          <div class="label">
+            <!-- <span class="label-text-alt">Bottom Left label</span>
+    <span class="label-text-alt">Bottom Right label</span> -->
+          </div>
+        </label>
+      </div>
+      <div class="w-full text-center">
+        <small> If don't have a accound click here. </small>
+      </div>
+      <div class="w-full flex flex-row justify-end">
+        <button type="submit" class="btn bg-primary w-full">
+          @if(false){
+          <span class="loading loading-spinner"></span>
+          } login
+        </button>
+      </div>
+      <div class="w-full">
+        <nx-angular-nest-template-dark-mode-selector></nx-angular-nest-template-dark-mode-selector>
+      </div>
+    </form>
+  </div>
+</div>
