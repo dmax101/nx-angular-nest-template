@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm!: FormGroup;
 
+  isLoading: boolean = false;
+
   constructor(
     private themeService: ThemeService,
     private formBuilder: FormBuilder
@@ -46,6 +48,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    this.isLoading = true;
     this.loginForm.reset();
   }
 }
