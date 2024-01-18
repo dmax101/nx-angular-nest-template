@@ -16,22 +16,19 @@ export class DarkModeSelectorComponent implements OnInit, OnDestroy {
 
   constructor(private themeService: ThemeService) {}
 
+  toggleDarkMode() {
+    this.themeService.toggleThemeMode();
+  }
+
   ngOnInit(): void {
     this.isDarkModeSubscription$ = this.themeService.isDarkMode.subscribe(
       (data) => {
         this.isDarkMode$.next(data);
-        console.log('aquiiii!!!!', data);
       }
     );
   }
 
   ngOnDestroy(): void {
     this.isDarkModeSubscription$.unsubscribe();
-  }
-
-  toggleDarkMode() {
-    console.log('clique');
-
-    this.themeService.toggleTheme();
   }
 }

@@ -36,7 +36,8 @@
       "configurations": [
         "Launch Microsoft Edge in headless mode",
         "Open Edge DevTools"
-      ]
+      ],
+      "preLaunchTask": "npm: serve:ui"
     },
     {
       "name": "Launch Edge and attach DevTools",

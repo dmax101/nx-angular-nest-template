@@ -1,5 +1,7 @@
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { LocalStorageService } from 'ngx-localstorage';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -7,36 +9,49 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ThemeService {
   private _darkMode: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    false
+    this.localStorageService.get('theme') === 'dark'
   );
 
   isDarkMode = this._darkMode.asObservable();
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    @Inject(PLATFORM_ID) private platformId: object
+    private localStorageService: LocalStorageService,
+    private router: Router
   ) {}
 
-  isDarkTheme(): boolean {
-    const body = this.document.body;
-    const theme = body.getAttribute('data-theme');
-
-    return theme === 'light' ? false : true;
+  setLightMode() {
+    this.localStorageService.set('theme', 'light');
+    this.document.documentElement.classList.remove('dark');
+    this._darkMode.next(false);
   }
 
-  setDarkMode(DarkMode: boolean) {
-    if (isPlatformBrowser(this.platformId)) {
-      this._darkMode.next(DarkMode);
-      const body = document.body;
-      body.setAttribute('data-theme', DarkMode ? 'dark' : 'light');
+  setDarkMode() {
+    this.localStorageService.set('theme', 'dark');
+    this.document.documentElement.classList.add('dark');
+    this._darkMode.next(true);
+  }
+
+  toggleThemeMode() {
+    this.localStorageService.get('theme') === 'dark'
+      ? this.setLightMode()
+      : this.setDarkMode();
+  }
+
+  setSystemMode() {
+    if (this.localStorageService.get('sysTheme') === 'dark') {
+      this.document.documentElement.classList.add('dark');
+      this._darkMode.next(true);
+    } else {
+      this.document.documentElement.classList.remove('dark');
+      this._darkMode.next(false);
     }
   }
 
-  toggleTheme() {
-    console.log('toggle theme');
-    if (isPlatformBrowser(this.platformId)) {
-      this._darkMode.next(!this.isDarkTheme());
-      this.setDarkMode(!this.isDarkTheme());
-    }
+  async updateSysTheme() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    const self = '.';
+    this.router.navigate([self]);
   }
 }
