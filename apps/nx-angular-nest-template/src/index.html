@@ -11,29 +11,29 @@
 
       if (!('sysTheme' in localStorage)) {
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          localStorage.setItem('sysTheme', 'dark');
+          localStorage.setItem('sysTheme', "'dark'");
         } else {
-          localStorage.setItem('sysTheme', 'light');
+          localStorage.setItem('sysTheme', "'light'");
         }
       }
 
       if (!('theme' in localStorage)) {
         sysTheme = localStorage.getItem('sysTheme');
 
-        if (sysTheme === 'dark') {
+        if (sysTheme === "'dark'") {
           localStorage.setItem('theme', sysTheme);
-          documentClasses.add('dark');
+          documentClasses.add("'dark'");
         } else {
           localStorage.setItem('theme', sysTheme);
-          documentClasses.remove('dark');
+          documentClasses.remove("'dark'");
         }
       } else {
         actualTheme = localStorage.getItem('theme');
 
-        if (actualTheme === 'dark') {
-          documentClasses.add('dark');
+        if (actualTheme === "'dark'") {
+          documentClasses.add("'dark'");
         } else {
-          documentClasses.remove('dark');
+          documentClasses.remove("'dark'");
         }
       }
     </script>

@@ -15,21 +15,33 @@
         alt=""
       />
     </div>
-    <form class="w-full flex flex-col gap-4">
+    <form
+      class="w-full flex flex-col gap-4"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+    >
       <div class="w-full flex gap-2">
         <label class="form-control w-full max-w-xs">
           <div class="label">
             <span class="label-text">E-mail</span>
-            <!-- <span class="label-text-alt">Top Right label</span> -->
+            <span class="label-text-alt">* required</span>
           </div>
           <input
             type="email"
             placeholder="E-mail"
             class="input input-bordered w-full max-w-xs"
+            formControlName="email"
           />
           <div class="label">
-            <!-- <span class="label-text-alt">Bottom Left label</span>
-    <span class="label-text-alt">Bottom Right label</span> -->
+            <span class="label-text-alt"></span>
+            <span
+              class="label-text-alt text-red-500"
+              *ngIf="
+                loginForm.controls['email'].dirty &&
+                loginForm.hasError('required', 'email')
+              "
+              >* you must provide an e-mail</span
+            >
           </div>
         </label>
       </div>
@@ -37,24 +49,37 @@
         <label class="form-control w-full max-w-xs">
           <div class="label">
             <span class="label-text">Password</span>
-            <!-- <span class="label-text-alt">Top Right label</span> -->
+            <span class="label-text-alt">* required</span>
           </div>
           <input
             type="password"
             placeholder="Password"
             class="input input-bordered w-full max-w-xs"
+            formControlName="password"
           />
           <div class="label">
-            <!-- <span class="label-text-alt">Bottom Left label</span>
-    <span class="label-text-alt">Bottom Right label</span> -->
+            <span class="label-text-alt"></span>
+            <span
+              class="label-text-alt text-red-500"
+              *ngIf="
+                loginForm.controls['password'].dirty &&
+                loginForm.hasError('required', 'password')
+              "
+              >* you must provide a password</span
+            >
           </div>
         </label>
       </div>
       <div class="w-full text-center">
+        <p>Form Status: {{ loginForm.status }}</p>
         <small> If don't have a accound click here. </small>
       </div>
       <div class="w-full flex flex-row justify-end">
-        <button type="submit" class="btn bg-primary w-full">
+        <button
+          type="submit"
+          class="btn bg-primary w-full"
+          [disabled]="loginForm.invalid"
+        >
           @if(false){
           <span class="loading loading-spinner"></span>
           } login
