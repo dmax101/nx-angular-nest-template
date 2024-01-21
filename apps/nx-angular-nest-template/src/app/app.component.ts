@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NxWelcomeComponent } from './nx-welcome.component';
-import { LoginComponent } from './core/auth/login.component';
+import { LoginComponent } from './core/auth/components/login.component';
 import { ThemeService } from './shared/services/theme.service';
 
 @Component({

@@ -1,19 +1,21 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '../../../shared/shared.module';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { ThemeService } from '../../shared/services/theme.service';
+import { ThemeService } from '../../../shared/services/theme.service';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'nx-angular-nest-template-login',
   standalone: true,
   imports: [CommonModule, SharedModule, ReactiveFormsModule],
+  providers: [AuthService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -27,6 +29,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private themeService: ThemeService,
+    private authService: AuthService,
     private formBuilder: FormBuilder
   ) {}
 
@@ -49,6 +52,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.isLoading = true;
+
+    this.authService.login(this.loginForm.value).subscribe((data) => {
+      console.log(data);
+    });
+
     this.loginForm.reset();
   }
 }

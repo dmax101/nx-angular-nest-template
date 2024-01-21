@@ -7,6 +7,8 @@ import {
   UserWithoutPassword,
 } from '../../modules/users/users.dto';
 
+import * as bcrypt from 'bcrypt';
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -24,10 +26,10 @@ export class AuthService {
       throw new NotFoundException('User not found!');
     }
 
-    if (user && user.password === pass) {
-      delete user.password;
+    const isMatch = await bcrypt.compare(pass, user.password);
 
-      console.log(user);
+    if (isMatch) {
+      delete user.password;
 
       return user;
     }
