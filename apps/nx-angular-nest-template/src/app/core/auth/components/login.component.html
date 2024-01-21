@@ -90,4 +90,10 @@
       </div>
     </form>
   </div>
+
+  <div class="toast toast-center" *ngIf="!errorMessage.hidden">
+    <div class="alert alert-error">
+      <span>Error! {{ errorMessage.message }}</span>
+    </div>
+  </div>
 </div>

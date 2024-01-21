@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../shared/shared.module';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription, catchError, throwError } from 'rxjs';
 import { ThemeService } from '../../../shared/services/theme.service';
 import {
   FormBuilder,
@@ -26,6 +26,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginForm!: FormGroup;
 
   isLoading: boolean = false;
+
+  errorMessage = {
+    hidden: true,
+    message: '',
+  };
 
   constructor(
     private themeService: ThemeService,
@@ -53,10 +58,26 @@ export class LoginComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.isLoading = true;
 
-    this.authService.login(this.loginForm.value).subscribe((data) => {
-      console.log(data);
-    });
+    this.authService
+      .login(this.loginForm.value)
+      .pipe(
+        catchError((error) => {
+          if (error.status === 401) {
+            this.errorMessage.message = error.statusText;
+            this.errorMessage.hidden = false;
+            this.isLoading = false;
+          }
 
-    this.loginForm.reset();
+          setTimeout(() => {
+            this.errorMessage.hidden = true;
+          }, 6000);
+
+          return throwError(() => error);
+        })
+      )
+      .subscribe((data) => {
+        console.log(data);
+        this.loginForm.reset();
+      });
   }
 }
